@@ -48,6 +48,16 @@ class Tree {
     delete(value) {}
 
     find(value) {
+        if(!value) return null;
+
+        let current = this.root;
+
+        while(current) {
+            if(current.value === value) return current;
+
+            current = current.value > value ? current.left : current.right;
+        }
+
         return null;
     }
 
