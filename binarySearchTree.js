@@ -22,4 +22,30 @@ class Tree {
 
         return node;
     }
+
+    insert(value) {
+        let node = new Node(value);
+
+        if(!this.root) this.root = node;
+        if(this.find(value)) return 'Value already in tree';
+
+        let current = this.root;
+        let beforeCurrent;
+
+        while(current) {
+            beforeCurrent = current;
+            current = current.value > value ? current.left : current.right;
+        }
+
+        if(beforeCurrent.value > value) {
+            beforeCurrent.left = node;
+        }
+        else {
+            beforeCurrent.right = node;
+        }
+    }
+
+    find(value) {
+        return null;
+    }
 }
