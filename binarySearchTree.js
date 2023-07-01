@@ -45,7 +45,25 @@ class Tree {
         }
     }
 
+    delete(value) {}
+
     find(value) {
         return null;
     }
+
+    levelOrder(func) {}
+
+    preoder(func) {}
+
+    inorder(func) {}
+
+    postorder(func) {}
+
+    height(node) {}
+
+    depth(node) {}
+
+    isBalanced() {}
+
+    rebalance() {}
 }
