@@ -63,10 +63,13 @@ class Tree {
 
     levelOrder(func) {}
 
+    // <root><left><right>
     preoder(func) {}
 
+    // <left><root><right>
     inorder(func) {}
 
+    // <left><right><root>
     postorder(func) {}
 
     height(node) {}
