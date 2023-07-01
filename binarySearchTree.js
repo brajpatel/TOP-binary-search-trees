@@ -13,6 +13,13 @@ class Tree {
     }
 
     buildTree(arr) {
-        return null;
+        if(!arr.length) return null;
+
+        let mid = Math.floor(arr.length / 2);
+        let node = new Node(arr[mid]);
+        node.left = this.buildTree(arr.slice(0, mid));
+        node.right = this.buildTree(arr.slice(mid + 1));
+
+        return node;
     }
 }
