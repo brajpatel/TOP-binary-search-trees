@@ -61,7 +61,25 @@ class Tree {
         return null;
     }
 
-    levelOrder(func) {}
+    levelOrder(func = this.pushTraversedValues) {
+        if(!this.root) return null;
+
+        let traversedValues = [];
+        let queue = [];
+        queue.push(this.root);
+
+        while(queue.length) {
+            let node = queue[0];
+
+            func(traversedValues, node.value);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+            
+            queue.shift();
+        }
+
+        return traversedValues;
+    }
 
     // <root><left><right>
     preoder(func) {}
@@ -71,6 +89,10 @@ class Tree {
 
     // <left><right><root>
     postorder(func) {}
+
+    pushTraversedValues(arr, value) {
+        arr.push(value);
+    }
 
     height(node) {}
 
