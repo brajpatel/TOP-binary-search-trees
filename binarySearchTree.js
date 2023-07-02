@@ -84,13 +84,26 @@ class Tree {
 
     // DEPTH FIRST - STACK
     // <root><left><right>
-    preorder(func = this.pushTraversedValues, traversedValues = [], node = this.root) {
+    preorder(traversedValues = [], node = this.root) {
         if(!node) return;
 
         // RECURSIVE SOLUTION
-        func(traversedValues, node.value);
+        traversedValues.push(node.value);
         this.preorder(func, traversedValues, node.left);
         this.preorder(func, traversedValues, node.right);
+
+        // STACK SOLUTION
+        let stack = [];
+        stack.push(this.root);
+
+        while(stack.length) {
+            let node = stack[stack.length - 1];
+
+            traversedValues.push(node.value);
+            stack.pop();
+            if(node.right) stack.push(node.right);
+            if(node.left) stack.push(node.left);
+        }
 
         return traversedValues;
     }
@@ -100,10 +113,6 @@ class Tree {
 
     // <left><right><root>
     postorder(func) {}
-
-    pushTraversedValues(arr, value) {
-        arr.push(value);
-    }
 
     height(node) {}
 
