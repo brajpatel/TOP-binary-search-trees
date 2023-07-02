@@ -62,7 +62,7 @@ class Tree {
     }
 
     // BREADTH FIRST - QUEUE
-    levelOrder(func = this.pushTraversedValues) {
+    levelOrder() {
         if(!this.root) return null;
 
         let traversedValues = [];
@@ -72,7 +72,7 @@ class Tree {
         while(queue.length) {
             let node = queue[0];
 
-            func(traversedValues, node.value);
+            traversedValues.push(node.value);
             if(node.left) queue.push(node.left);
             if(node.right) queue.push(node.right);
             
@@ -93,26 +93,28 @@ class Tree {
         this.preorder(func, traversedValues, node.right);
 
         // STACK SOLUTION
-        let stack = [];
-        stack.push(this.root);
+        // let stack = [];
+        // stack.push(this.root);
 
-        while(stack.length) {
-            let node = stack[stack.length - 1];
+        // while(stack.length) {
+        //     let node = stack[stack.length - 1];
 
-            traversedValues.push(node.value);
-            stack.pop();
-            if(node.right) stack.push(node.right);
-            if(node.left) stack.push(node.left);
-        }
+        //     traversedValues.push(node.value);
+        //     stack.pop();
+        //     if(node.right) stack.push(node.right);
+        //     if(node.left) stack.push(node.left);
+        // }
 
         return traversedValues;
     }
 
     // <left><root><right>
-    inorder(func) {}
+    inorder(traversedValues = [], node = this.root) {
+
+    }
 
     // <left><right><root>
-    postorder(func) {}
+    postorder(traversedValues = [], node = this.root) {}
 
     height(node) {}
 
