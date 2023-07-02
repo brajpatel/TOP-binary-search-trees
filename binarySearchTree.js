@@ -89,8 +89,8 @@ class Tree {
 
         // RECURSIVE SOLUTION
         traversedValues.push(node.value);
-        this.preorder(func, traversedValues, node.left);
-        this.preorder(func, traversedValues, node.right);
+        this.preorder(traversedValues, node.left);
+        this.preorder(traversedValues, node.right);
 
         // STACK SOLUTION
         // let stack = [];
@@ -124,3 +124,17 @@ class Tree {
 
     rebalance() {}
 }
+
+const tree = new Tree([30, 50, 70]);
+
+tree.insert(20);
+tree.insert(40);
+tree.insert(80);
+tree.insert(32);
+tree.insert(75);
+tree.insert(85);
+tree.insert(36);
+tree.insert(31);
+
+console.log('Level Order', tree.levelOrder());
+console.log('Preorder', tree.preorder());
