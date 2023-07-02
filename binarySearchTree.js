@@ -61,6 +61,7 @@ class Tree {
         return null;
     }
 
+    // BREADTH FIRST - QUEUE
     levelOrder(func = this.pushTraversedValues) {
         if(!this.root) return null;
 
@@ -81,8 +82,18 @@ class Tree {
         return traversedValues;
     }
 
+    // DEPTH FIRST - STACK
     // <root><left><right>
-    preoder(func) {}
+    preorder(func = this.pushTraversedValues, traversedValues = [], node = this.root) {
+        if(!node) return;
+
+        // RECURSIVE SOLUTION
+        func(traversedValues, node.value);
+        this.preorder(func, traversedValues, node.left);
+        this.preorder(func, traversedValues, node.right);
+
+        return traversedValues;
+    }
 
     // <left><root><right>
     inorder(func) {}
