@@ -188,7 +188,10 @@ class Tree {
 
     isBalanced() {}
 
-    rebalance() {}
+    rebalance() {
+        let values = this.inorder();
+        this.root = this.buildTree(values);
+    }
 }
 
 const tree = new Tree([30, 50, 70]);
