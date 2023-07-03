@@ -157,7 +157,34 @@ class Tree {
         return Math.max(left, right) + 1;
     }
 
-    depth(node) {}
+    depth(node, current = this.root, count = 0) {
+        if(!current) return;
+
+        // RECURSIVE SOLUTION
+        if(current.value === node.value) return count;
+
+        if(current.value > node.value) {
+            return this.depth(node, current.left, count + 1);
+        }
+        else {
+            return this.depth(node, current.right, count + 1);
+        }
+
+        // ITERATIVE SOLUTION
+        // while(current) {
+        //     if(current.value === node.value) {
+        //         return count;
+        //     }
+        //     else if(current.value > node.value) {
+        //         current = current.left;
+        //     }
+        //     else {
+        //         current = current.right;
+        //     }
+            
+        //     count++;
+        // }
+    }
 
     isBalanced() {}
 
