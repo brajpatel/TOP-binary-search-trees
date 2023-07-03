@@ -113,7 +113,28 @@ class Tree {
 
     // <left><root><right>
     inorder(traversedValues = [], node = this.root) {
+        if(!node) return;
 
+        // RECURSIVE SOLUTION
+        this.inorder(traversedValues, node.left);
+        traversedValues.push(node.value);
+        this.inorder(traversedValues, node.right);
+
+        // STACK SOLUTION
+        // let stack = [];
+
+        // while(node || stack.length) {
+        //     while(node) {
+        //         stack.push(node);
+        //         node = node.left;
+        //     }
+
+        //     node = stack.pop();
+        //     traversedValues.push(node.value);
+        //     node = node.right;
+        // }
+
+        return traversedValues;
     }
 
     // <left><right><root>
