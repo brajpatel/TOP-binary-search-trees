@@ -47,18 +47,21 @@ class Tree {
 
     delete(value) {}
 
-    find(value) {
-        if(!value) return null;
+    find(value, node = this.root) {
+        if(!node) return null;
 
-        let current = this.root;
+        // RECURSIVE SOLUTION
+        if(node.value > value) return this.find(value, node.left);
+        if(node.value < value) return this.find(value, node.right);
+        
+        // ITERATIVE SOLUTION
+        // while(node) {
+        //     if(node.value === value) return node;
 
-        while(current) {
-            if(current.value === value) return current;
+        //     node = node.value > value ? node.left : node.right;
+        // }
 
-            current = current.value > value ? current.left : current.right;
-        }
-
-        return null;
+        return node;
     }
 
     // BREADTH FIRST - QUEUE
