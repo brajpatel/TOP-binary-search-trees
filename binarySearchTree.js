@@ -138,7 +138,15 @@ class Tree {
     }
 
     // <left><right><root>
-    postorder(traversedValues = [], node = this.root) {}
+    postorder(traversedValues = [], node = this.root) {
+        if(!node) return;
+
+        this.postorder(traversedValues, node.left);
+        this.postorder(traversedValues, node.right);
+        traversedValues.push(node.value);
+
+        return traversedValues;
+    }
 
     height(node) {}
 
