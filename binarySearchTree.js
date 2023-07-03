@@ -186,9 +186,21 @@ class Tree {
         // }
     }
 
-    isBalanced() {}
+    isBalanced(node = this.root) {
+        if(!node) return true;
+
+        let heightDifference = Math.abs(this.height(node.left) - this.height(node.right));
+
+        return (
+            heightDifference <= 1 &&
+            this.isBalanced(node.left) &&
+            this.isBalanced(node.right)
+        );
+    }
 
     rebalance() {
+        if(this.isBalanced()) return;
+
         let values = this.inorder();
         this.root = this.buildTree(values);
     }
