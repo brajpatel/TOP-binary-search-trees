@@ -148,7 +148,14 @@ class Tree {
         return traversedValues;
     }
 
-    height(node) {}
+    height(node) {
+        if(!node) return 0;
+
+        let left = this.height(node.left);
+        let right = this.height(node.right);
+
+        return Math.max(left, right) + 1;
+    }
 
     depth(node) {}
 
