@@ -1,4 +1,6 @@
-export default class Tree {
+const Node = require('./Node');
+
+class Tree {
     constructor(arr) {
         this.sortedArray = [...new Set(arr)].sort((a, b) => a - b);
         this.root = this.buildTree(this.sortedArray);
@@ -344,16 +346,4 @@ export default class Tree {
     }
 }
 
-const tree = new Tree([30, 50, 70]);
-
-tree.insert(20);
-tree.insert(40);
-tree.insert(80);
-tree.insert(32);
-tree.insert(75);
-tree.insert(85);
-tree.insert(36);
-tree.insert(31);
-
-console.log('Level Order', tree.levelOrder());
-console.log('Preorder', tree.preorder());
+module.exports = Tree;
