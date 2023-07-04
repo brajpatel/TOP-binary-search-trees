@@ -34,7 +34,12 @@ class Tree {
 
         while(current) {
             beforeCurrent = current;
-            current = current.value > value ? current.left : current.right;
+            if(current.value > value) {
+                current = current.left;
+            }
+            else {
+                current = current.right;
+            }
         }
 
         if(beforeCurrent.value > value) {
@@ -45,7 +50,148 @@ class Tree {
         }
     }
 
-    delete(value) {}
+    delete(value) {
+        if(!value || !this.find(value)) return;
+        let values = this.inorder();
+        let node = this.find(value);
+
+        if(value === this.root.value) {
+            // node is the ROOT
+            let root = this.root;
+            let current = this.root;
+            let nodeToReplace = this.find(values[values.indexOf(value) + 1]);
+            let beforeNodeToReplace;
+
+            if(root.right.right && !root.right.left) {
+                nodeToReplace = root.right;
+                nodeToReplace.left = root.left;
+                this.root = nodeToReplace;;
+            }
+            else {
+                while(current.value !== nodeToReplace.value) {
+                    beforeNodeToReplace = current;
+                    if(current.value > value) {
+                        current = current.left;
+                    }
+                    else {
+                        current = current.right;
+                    }
+                }
+
+                if(beforeNodeToReplace.left === nodeToReplace) {
+                    beforeNodeToReplace.left = null;
+                }
+                else {
+                    beforeNodeToReplace.right = null;
+                }
+
+                nodeToReplace.left = root.left;
+                nodeToReplace.right = root.right;
+                this.root = nodeToReplace;
+            }
+        }
+        else if(node.left && node.right) {
+            // node is pointing to TWO NODES
+            let current = this.root;
+            let beforeCurrent;
+
+            while(current.value !== value) {
+                beforeCurrent = current;
+                if(current.value > value) {
+                    current = current.left;
+                }
+                else {
+                    current = current.right;
+                }
+            }
+
+            let newCurrent = this.root;
+            let nodeToReplace = this.find(values[values.indexOf(value) + 1]);
+            let beforeNodeToReplace;
+
+            while(newCurrent.value !== nodeToReplace.value) {
+                beforeNodeToReplace = newCurrent;
+
+                if(newCurrent.value > nodeToReplace.value) {
+                    newCurrent = newCurrent.left;
+                }
+                else {
+                    newCurrent = newCurrent.right;
+                }
+            }
+
+            if(beforeNodeToReplace.left.value === nodeToReplace.value) {
+                beforeNodeToReplace.left = null;
+            }
+            else {
+                beforeNodeToReplace.right = null;
+            }
+
+            if(beforeCurrent.left.value === value) {
+                beforeCurrent.left = nodeToReplace;
+            }
+            else {
+                beforeCurrent.right = nodeToReplace;
+            }
+
+            nodeToReplace.left = current.left;
+            nodeToReplace.right = nodeToReplace.right;
+        }
+        else if(node.left || node.right) {
+            // node is pointing to AT LEAST ONE node
+            let current = this.root;
+            let beforeCurrent;
+
+            while(current.value !== value) {
+                beforeCurrent = current;
+                if(current.value > value) {
+                    current = current.left;
+                }
+                else {
+                    current = current.right;
+                }
+            }
+
+            if(beforeCurrent.left.value === value) {
+                if(current.left) {
+                    beforeCurrent.left = current.left;
+                }
+                else {
+                    beforeCurrent.left = current.right;
+                }
+            }
+            else if(beforeCurrent.right.value === value) {
+                if(current.right) {
+                    beforeCurrent.right = current.right;
+                }
+                else {
+                    beforeCurrent.right = current.left;
+                }
+            }
+        }
+        else if(!node.left && !node.right) {
+            // node is a LEAF NODE
+            let current = this.root;
+            let beforeCurrent;
+
+            while(current.value !== value) {
+                beforeCurrent = current;
+                if(current.value > value) {
+                    current = current.left;
+                }
+                else {
+                    current = current.right;
+                }
+            }
+
+            if(beforeCurrent.left.value === value) {
+                beforeCurrent.left = null;
+            }
+            else {
+                beforeCurrent.right = null;
+            }
+        }
+    }
 
     find(value, node = this.root) {
         if(!node) return null;
