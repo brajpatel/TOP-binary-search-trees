@@ -1,5 +1,5 @@
-const Tree = require('./Tree');
-
+import Node from './Node';
+import Tree from './Tree';
 // create an array of random values
 let arr = [];
 
